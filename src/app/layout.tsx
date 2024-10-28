@@ -1,8 +1,9 @@
-import { createTheme, ThemeProvider } from "@mui/material";
+import theme from "@/theme";
+import { ThemeProvider } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import type { Metadata } from "next";
+import TrpcProvider from "./_trpc/Provider";
 import "./globals.css";
-import theme from "@/theme";
 
 export const metadata: Metadata = {
   title: "FlashcardsAi",
@@ -19,7 +20,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <AppRouterCacheProvider>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          <TrpcProvider>
+            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          </TrpcProvider>
         </AppRouterCacheProvider>
       </body>
     </html>

@@ -12,3 +12,5 @@ const registerFormZod = z
   });
 
 export default registerFormZod;
+
+export type RegisterForm = z.infer<typeof registerFormZod>;
