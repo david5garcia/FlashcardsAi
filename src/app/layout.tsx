@@ -2,6 +2,7 @@ import theme from "@/theme";
 import { ThemeProvider } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import type { Metadata } from "next";
+import "react-toastify/dist/ReactToastify.css";
 import TrpcProvider from "./_trpc/Provider";
 import "./globals.css";
 

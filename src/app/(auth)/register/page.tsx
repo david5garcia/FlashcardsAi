@@ -1,22 +1,35 @@
 "use client";
+import { trpc } from "@/app/_trpc/client";
 import InputError from "@/components/shared/inputError";
-import registerFormZod from "@/model/zod/auth/register/registerForm.zod";
+import registerFormZod, {
+  RegisterForm
+} from "@/model/zod/auth/register/registerForm.zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { toast, ToastContainer } from "react-toastify";
 
 const Register = () => {
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm({
+  } = useForm<RegisterForm>({
     resolver: zodResolver(registerFormZod)
   });
 
-  console.log(errors);
+  const registerMutation = trpc.register.registerUser.useMutation({
+    onSuccess: (response) => {
+      toast.success(response.message, {autoClose: 10000});
+    },
+    onError: (error) => {
+      toast.error(error.message);
+      console.error(error);
+    }
+  });
 
-  const onSubmit = (e: any) => {
-    console.log(e);
+  const onSubmit: SubmitHandler<RegisterForm> = (data) => {
+    const res = registerMutation.mutate(data);
+    console.log(res);
   };
 
   return (
@@ -48,6 +61,7 @@ const Register = () => {
           Submit
         </button>
       </form>
+      <ToastContainer />
     </div>
   );
 };

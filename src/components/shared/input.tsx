@@ -1,21 +1,21 @@
 import { TextField, TextFieldVariants } from "@mui/material";
-import type { FieldValues, UseFormRegister } from "react-hook-form";
+import type { Path, UseFormRegister } from "react-hook-form";
 
-type InputProps = {
-  id: string;
+type InputProps<T extends Record<string, any>> = {
+  id: Path<T>;
   label: string;
   variant?: TextFieldVariants;
   type?: string;
-  register?: UseFormRegister<FieldValues>;
+  register?: UseFormRegister<T>;
 };
 
-const Input = ({
+const Input = <T extends Record<string, any>>({
   id,
   label,
   variant = "outlined",
   type = "text",
   register
-}: InputProps) => {
+}: InputProps<T>) => {
   return (
     <TextField
       id={id}

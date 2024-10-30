@@ -1,10 +1,20 @@
 import { z } from "zod";
 
+const passwordRequirements =
+  /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/;
+
 const registerFormZod = z
   .object({
     email: z.string().email(),
-    password: z.string().min(6).max(20),
-    confirmPassword: z.string().min(6).max(20)
+    password: z
+      .string()
+      .min(8)
+      .max(20)
+      .regex(
+        passwordRequirements,
+        "Password must contain at least one lowercase and uppercase letter, one number, and one special character"
+      ),
+    confirmPassword: z.string().min(8).max(20)
   })
   .refine((data) => data.password === data.confirmPassword, {
     path: ["confirmPassword"],
