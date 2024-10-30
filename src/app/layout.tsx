@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import "react-toastify/dist/ReactToastify.css";
 import TrpcProvider from "./_trpc/Provider";
 import "./globals.css";
+import NextAuthProvider from "@/context/nextAuthContext";
 
 export const metadata: Metadata = {
   title: "FlashcardsAi",
@@ -13,17 +14,21 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children
+  children,
+  params: { session, ...params }
 }: Readonly<{
   children: React.ReactNode;
+  params: Record<string, any>;
 }>) {
   return (
     <html lang="en">
       <body>
         <AppRouterCacheProvider>
-          <TrpcProvider>
-            <ThemeProvider theme={theme}>{children}</ThemeProvider>
-          </TrpcProvider>
+          <NextAuthProvider>
+            <TrpcProvider>
+              <ThemeProvider theme={theme}>{children}</ThemeProvider>
+            </TrpcProvider>
+          </NextAuthProvider>
         </AppRouterCacheProvider>
       </body>
     </html>
