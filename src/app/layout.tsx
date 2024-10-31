@@ -1,3 +1,4 @@
+import NextAuthProvider from "@/context/nextAuthContext";
 import theme from "@/theme";
 import { ThemeProvider } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
@@ -5,7 +6,7 @@ import type { Metadata } from "next";
 import "react-toastify/dist/ReactToastify.css";
 import TrpcProvider from "./_trpc/Provider";
 import "./globals.css";
-import NextAuthProvider from "@/context/nextAuthContext";
+import Navbar from "@/components/layout/navbar";
 
 export const metadata: Metadata = {
   title: "FlashcardsAi",
@@ -26,7 +27,10 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <NextAuthProvider>
             <TrpcProvider>
-              <ThemeProvider theme={theme}>{children}</ThemeProvider>
+              <ThemeProvider theme={theme}>
+                <Navbar />
+                {children}
+              </ThemeProvider>
             </TrpcProvider>
           </NextAuthProvider>
         </AppRouterCacheProvider>
