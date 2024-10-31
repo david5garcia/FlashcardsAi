@@ -1,5 +1,6 @@
 "use client";
 import { trpc } from "@/app/_trpc/client";
+import Button from "@/components/shared/button";
 import Card from "@/components/shared/card";
 import InputError from "@/components/shared/inputError";
 import registerFormZod, {
@@ -20,7 +21,7 @@ const Register = () => {
 
   const registerMutation = trpc.register.registerUser.useMutation({
     onSuccess: (response) => {
-      toast.success(response.message, {autoClose: 10000});
+      toast.success(response.message, { autoClose: 10000 });
     },
     onError: (error) => {
       toast.error(error.message);
@@ -58,9 +59,7 @@ const Register = () => {
           label={"Confirm Password"}
           error={errors.confirmPassword?.message}
         />
-        <button className="bg-blue-600 w-32 py-3 rounded-lg text-white hover:bg-blue-800 mx-auto">
-          Submit
-        </button>
+        <Button className="mx-auto">Submit</Button>
       </form>
       <ToastContainer />
     </Card>

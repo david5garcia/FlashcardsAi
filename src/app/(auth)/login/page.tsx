@@ -1,4 +1,5 @@
 "use client";
+import Button from "@/components/shared/button";
 import Card from "@/components/shared/card";
 import InputError from "@/components/shared/inputError";
 import loginFormZod, { LoginForm } from "@/model/zod/auth/login/loginForm.zod";
@@ -50,9 +51,7 @@ const Login = ({ searchParams }: { searchParams: Record<string, any> }) => {
           label={"Password"}
           error={errors.password?.message}
         />
-        <button className="bg-blue-600 w-32 py-3 rounded-lg text-white hover:bg-blue-800 mx-auto">
-          Submit
-        </button>
+        <Button className="mx-auto">Submit</Button>
       </form>
       <ToastContainer />
     </Card>
