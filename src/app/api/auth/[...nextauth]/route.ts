@@ -1,7 +1,18 @@
 import prisma from "@/lib/db/db";
 import bcrypt from "bcrypt";
+import { DefaultSession } from "next-auth";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
+
+declare module "next-auth" {
+  interface Session {
+    user: {
+      userId: string;
+      role: string;
+      verified: boolean;
+    } & DefaultSession["user"];
+  }
+}
 
 export const authOptions = {
   providers: [
@@ -55,6 +66,7 @@ export const authOptions = {
         ...session,
         user: {
           ...session.user,
+          userId: token.id,
           role: token.role,
           verified: token.verified
         },
@@ -69,6 +81,7 @@ export const authOptions = {
       user: Record<string, any>;
     }) {
       if (user) {
+        token.id = user.id;
         token.role = user.role;
         token.verified = user.verified;
       }
