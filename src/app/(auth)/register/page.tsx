@@ -7,6 +7,7 @@ import registerFormZod, {
   RegisterForm
 } from "@/model/zod/auth/register/registerForm.zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -18,10 +19,12 @@ const Register = () => {
   } = useForm<RegisterForm>({
     resolver: zodResolver(registerFormZod)
   });
+  const router = useRouter();
 
   const registerMutation = trpc.register.registerUser.useMutation({
     onSuccess: (response) => {
       toast.success(response.message, { autoClose: 10000 });
+      router.push("/login");
     },
     onError: (error) => {
       toast.error(error.message);
