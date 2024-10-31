@@ -40,7 +40,7 @@ export default function Home() {
               </Link>
               <span> / </span>
               <Link
-                className="bg-[#eeecec] text-[#4858cf]  w-28 text-center py-3 rounded-lg hover:bg-[#4858cf] hover:text-white transition-all ease-in-out duration-500"
+                className="bg-[#4858cf] text-white  w-28 text-center py-3 rounded-lg hover:bg-[#eeecec] hover:text-[#4858cf] transition-all ease-in-out duration-500"
                 href="/register"
               >
                 Register
