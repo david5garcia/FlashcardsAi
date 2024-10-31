@@ -1,4 +1,5 @@
 "use client";
+import Card from "@/components/shared/card";
 import InputError from "@/components/shared/inputError";
 import loginFormZod, { LoginForm } from "@/model/zod/auth/login/loginForm.zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -32,7 +33,7 @@ const Login = ({ searchParams }: { searchParams: Record<string, any> }) => {
   };
 
   return (
-    <div className="max-w-96 shadow-lg rounded-lg mx-auto p-6 mt-4 flex flex-col gap-6">
+    <Card className="max-w-96 mx-auto p-6 mt-4 flex flex-col gap-6">
       <h1 className="text-3xl mx-auto">Login</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
         <InputError
@@ -54,7 +55,7 @@ const Login = ({ searchParams }: { searchParams: Record<string, any> }) => {
         </button>
       </form>
       <ToastContainer />
-    </div>
+    </Card>
   );
 };
 
