@@ -88,7 +88,7 @@ const Navbar = () => {
               return (
                 <li key={link.href}>
                   <Link
-                    className="hover:bg-white hover:text-[#4858cf] px-5 py-2 rounded-lg"
+                    className="hover:bg-white hover:text-[#4858cf] px-6 py-3 rounded-lg"
                     href={link.href}
                   >
                     {link.label}

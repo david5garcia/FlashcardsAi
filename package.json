@@ -22,6 +22,7 @@
     "@trpc/react-query": "^11.0.0-rc.593",
     "@trpc/server": "^11.0.0-rc.593",
     "bcrypt": "^5.1.1",
+    "lottie-react": "^2.4.0",
     "next": "14.2.15",
     "next-auth": "^4.24.10",
     "nodemailer": "^6.9.16",
