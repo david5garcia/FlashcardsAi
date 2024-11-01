@@ -3,7 +3,14 @@ import { trpc } from "@/app/_trpc/client";
 import { Flashcard, Game, Message } from "@prisma/client";
 import { useChat } from "ai/react";
 import Image from "next/image";
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState
+} from "react";
 import Card from "../shared/card";
 
 const checkIfCorrect = (message: string, word: string) => {
@@ -122,14 +129,14 @@ const Chat = ({
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const updateDistance = () => {
       if (topChatContainerRef.current) {
         const rect = topChatContainerRef.current.getBoundingClientRect();
         const distance = window.innerHeight - rect.bottom;
         console.log(distance);
         setDistanceToBottom(distance);
-      } 
+      }
     };
 
     updateDistance();
