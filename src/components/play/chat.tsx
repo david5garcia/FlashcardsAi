@@ -127,10 +127,9 @@ const Chat = ({
       if (topChatContainerRef.current) {
         const rect = topChatContainerRef.current.getBoundingClientRect();
         const distance = window.innerHeight - rect.bottom;
+        console.log(distance);
         setDistanceToBottom(distance);
-      } else {
-        updateDistance();
-      }
+      } 
     };
 
     updateDistance();
