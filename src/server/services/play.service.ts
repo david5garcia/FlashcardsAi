@@ -1,8 +1,8 @@
 import prisma from "@/lib/db/db";
-import { Game, Level } from "@prisma/client";
+import { PrivateError } from "@/model/trpc/privateError";
+import { Game, GameStatus, Level } from "@prisma/client";
 import { conversationService } from "./conversation.service";
 import { flashcardService } from "./flashcard.service";
-import { PrivateError } from "@/model/trpc/privateError";
 
 const createSinglePlayerGame = async (
   userId: string,
@@ -37,6 +37,18 @@ const createSinglePlayerGame = async (
   return game;
 };
 
+const setGameStatus = async (gameId: string, status: GameStatus) => {
+  await prisma.game.update({
+    where: {
+      id: gameId
+    },
+    data: {
+      status
+    }
+  });
+};
+
 export const playService = {
-  createSinglePlayerGame
+  createSinglePlayerGame,
+  setGameStatus
 };

@@ -14,7 +14,7 @@ datasource db {
 }
 
 model User {
-  id            String            @id @default(cuid())
+  id            String         @id @default(cuid())
   email         String         @unique
   password      String
   verified      Boolean        @default(false)
@@ -32,7 +32,7 @@ model User {
 model Verification {
   id        Int      @id @default(autoincrement())
   token     String   @unique
-  userId    String      @unique
+  userId    String   @unique
   user      User     @relation(fields: [userId], references: [id])
   expiresAt DateTime
   createdAt DateTime @default(now())
@@ -57,18 +57,18 @@ model Conversation {
   id        Int       @id @default(autoincrement())
   user      User      @relation(fields: [userId], references: [id])
   userId    String
-  message   Message[]
+  messages   Message[]
   createdAt DateTime  @default(now())
-  Game      Game[]
+  Game      Game?
 }
 
 model Message {
-  id             Int          @id @default(autoincrement())
-  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  id             Int           @id @default(autoincrement())
+  conversation   Conversation  @relation(fields: [conversationId], references: [id])
   conversationId Int
   content        String
-  type           MessageType
-  createdAt      DateTime     @default(now())
+  sender         MessageSender
+  createdAt      DateTime      @default(now())
 }
 
 model Game {
@@ -77,7 +77,7 @@ model Game {
   userId         String
   createdAt      DateTime     @default(now())
   lobbyId        String?
-  conversationId Int
+  conversationId Int          @unique
   status         GameStatus
   mode           GameMode
   flashcard      Flashcard    @relation(fields: [flashcardId], references: [id])
@@ -98,8 +98,8 @@ model Lobby {
 model UserLobby {
   userId  String
   lobbyId String
-  user    User  @relation(fields: [userId], references: [id])
-  Lobby   Lobby @relation(fields: [lobbyId], references: [id])
+  user    User   @relation(fields: [userId], references: [id])
+  Lobby   Lobby  @relation(fields: [lobbyId], references: [id])
 
   @@id([userId, lobbyId])
 }
@@ -116,7 +116,7 @@ enum Role {
   ADMIN
 }
 
-enum MessageType {
+enum MessageSender {
   USER
   BOT
 }

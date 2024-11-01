@@ -1,15 +1,20 @@
-const Card = ({
-  children,
-  className
-}: {
+import React from "react";
+
+type CardProps = {
   children: React.ReactNode;
   className?: string;
-}) => {
+  style?: React.CSSProperties;
+};
+
+const Card = React.forwardRef<
+  HTMLDivElement,
+  CardProps
+>(({ children, className, style }, ref) => {
   return (
-    <div className={`${className} shadow-xl rounded-lg bg-white`}>
+    <div ref={ref} style={style} className={`${className} shadow-xl rounded-lg bg-white`}>
       {children}
     </div>
   );
-};
+});
 
 export default Card;

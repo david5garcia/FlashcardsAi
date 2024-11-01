@@ -5,6 +5,7 @@ import InputError from "@/components/shared/inputError";
 import loginFormZod, { LoginForm } from "@/model/zod/auth/login/loginForm.zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
+import { revalidatePath } from "next/cache";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
@@ -30,7 +31,7 @@ const Login = ({ searchParams }: { searchParams: Record<string, any> }) => {
       toast.error("Invalid email or password");
       return;
     }
-    router.push("/");
+    router.replace("/");
   };
 
   return (
