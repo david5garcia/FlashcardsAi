@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import { emailService } from "../email.service";
 
 async function sendVerificationEmail(email: string, token: string) {
-  const verificationLink = `${process.env.WEB_URL}/verify?token=${token}`;
+  const verificationLink = `${process.env.NEXT_PUBLIC_WEB_URL}/verify?token=${token}`;
 
   await emailService.sendEmail(
     email,

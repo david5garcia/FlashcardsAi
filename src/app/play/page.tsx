@@ -11,8 +11,6 @@ const Play = () => {
   const router = useRouter();
   const session = useSession();
 
-  console.log(session);
-
   const playMutation = trpc.play.createSinglePlayerGame.useMutation({
     onSuccess: (response) => {
       router.push(`/play/game/${response.game.id}`);
