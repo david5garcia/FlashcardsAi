@@ -23,7 +23,48 @@ const Chat = ({
   setGameOver: Dispatch<SetStateAction<boolean>>;
   conversation: { messages: Message[] };
 }) => {
-  const setGameStatusMutation = trpc.play.setGameStatus.useMutation();
+  const gameStatusMutation = trpc.play.setGameStatus.useMutation();
+  const messageMutation = trpc.conversation.createMessage.useMutation();
+
+  const setGameStatusCompleted = async () => {
+    await gameStatusMutation.mutateAsync({
+      gameId: game.id,
+      status: "COMPLETED"
+    });
+  };
+
+  const addFinalMessages = async (userInput: string) => {
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: prev.length.toString(),
+        role: "user",
+        content: userInput
+      },
+      {
+        id: prev.length.toString() + 1,
+        role: "assistant",
+        content: `Congratulations! You guessed the word: ${flashcard.word}`
+      }
+    ]);
+    messageMutation.mutate({
+      gameId: game.id,
+      sender: "USER",
+      content: userInput
+    });
+    messageMutation.mutate({
+      gameId: game.id,
+      sender: "BOT",
+      content: `Congratulations! You guessed the word: ${flashcard.word}`
+    });
+  };
+
+  const gameCompleted = (userInput: string) => {
+    setGameOver(true);
+    setInput("");
+    setGameStatusCompleted();
+    addFinalMessages(userInput);
+  };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,26 +73,7 @@ const Chat = ({
     const userInput = formData.get("input-field") as string;
 
     if (checkIfCorrect(userInput, flashcard.word)) {
-      setGameOver(true);
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: prev.length.toString(),
-          role: "user",
-          content: userInput
-        },
-        {
-          id: prev.length.toString() + 1,
-          role: "assistant",
-          content: `Congratulations! You guessed the word: ${flashcard.word}`
-        }
-      ]);
-      setInput("");
-      setGameStatusMutation.mutate({
-        gameId: game.id,
-        status: "COMPLETED"
-      });
-      return;
+      return gameCompleted(userInput);
     }
 
     handleSubmit(e);

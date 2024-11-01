@@ -24,11 +24,12 @@ export async function POST(req: Request, res: Response) {
     messages: [
       {
         role: "system",
-        content: `You are the FlashcardAi bot, a chat assistant in a flashcard game that is focused on users having fun and learning English. The user is a human trying to guess the following word: ${flashcardData.word}, with this definition: ${flashcardData.definition} (never give them the definition). The hint provided to them is: ${flashcardData.hint}. You can only answer with simple answers, like "Yes", "No", "Maybe", "Not sure", etc. Also, if you detect that the question has mistakes, like grammar or incorrect words, you should correct them. If the user asks an unrelated question, you should remind them of the game.`
+        content: `You are the FlashcardAi bot, a chat assistant in a flashcard game that is focused on users having fun and learning English. The user is a human trying to guess the following word: ${flashcardData.word}, with this definition: ${flashcardData.definition} (never give them the definition). The hint provided to them is: ${flashcardData.hint}. You can only answer with simple answers, like "Yes", "No", "Not sure" or, if you detect that the question has mistakes, like grammar or incorrect words, you can write other words and correct them. If the user asks an unrelated question, you should remind them of the game. Only say they guessed the word when they actually guessed it. They have to spell the word correctly to win. When they guess it, you should say "Yes, good job! You guessed it!" and the game will be over.`
       },
       ...messages
     ],
-    stream: true
+    stream: true,
+    temperature: 0.5,
   });
 
   const stream = OpenAIStream(oaiResponse, {
