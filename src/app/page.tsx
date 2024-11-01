@@ -18,7 +18,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="text-white flex flex-col items-center justify-center">
+    <div className="text-white flex flex-col items-center mt-[-2rem]">
       <h1 className="text-[3rem] md:text-[7rem] lg:text-[11rem] xl:text-[13rem]">
         FlashcardsAi
       </h1>
@@ -30,32 +30,33 @@ export default function Home() {
           Want to play?
         </h2>
         <div className="text-xl flex justify-center items-center gap-5">
-          {!session.data ? (
-            <>
-              <Link
-                className="bg-[#eeecec] text-[#4858cf]  w-28 text-center py-3 rounded-lg hover:bg-[#4858cf] hover:text-white transition-all ease-in-out duration-500"
-                href="/login"
-              >
-                Log in
-              </Link>
-              <span> / </span>
-              <Link
-                className="bg-[#4858cf] text-white  w-28 text-center py-3 rounded-lg hover:bg-[#eeecec] hover:text-[#4858cf] transition-all ease-in-out duration-500"
-                href="/register"
-              >
-                Register
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link
-                className="bg-[#eeecec] text-[#4858cf]  w-28 text-center py-3 rounded-lg hover:bg-[#4858cf] hover:text-white transition-all ease-in-out duration-500"
-                href="/play"
-              >
-                Start
-              </Link>
-            </>
-          )}
+          {session.status !== "loading" &&
+            (!session.data ? (
+              <>
+                <Link
+                  className="bg-[#eeecec] text-[#4858cf]  w-28 text-center py-3 rounded-lg hover:bg-[#4858cf] hover:text-white transition-all ease-in-out duration-500"
+                  href="/login"
+                >
+                  Log in
+                </Link>
+                <span> / </span>
+                <Link
+                  className="bg-[#4858cf] text-white  w-28 text-center py-3 rounded-lg hover:bg-[#eeecec] hover:text-[#4858cf] transition-all ease-in-out duration-500"
+                  href="/register"
+                >
+                  Register
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  className="bg-[#eeecec] text-[#4858cf]  w-28 text-center py-3 rounded-lg hover:bg-[#4858cf] hover:text-white transition-all ease-in-out duration-500"
+                  href="/play"
+                >
+                  Start
+                </Link>
+              </>
+            ))}
         </div>
       </div>
       <div>
