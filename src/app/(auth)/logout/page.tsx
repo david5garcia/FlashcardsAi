@@ -1,8 +1,11 @@
 "use client";
 import { signOut } from "next-auth/react";
+import { useEffect } from "react";
 
-const Logout = async () => {
-  await signOut({ callbackUrl: "/" });
+const Logout = () => {
+  useEffect(() => {
+    signOut({ callbackUrl: "/" });
+  }, []);
   return <></>;
 };
 

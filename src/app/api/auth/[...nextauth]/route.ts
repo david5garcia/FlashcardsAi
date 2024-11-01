@@ -1,6 +1,7 @@
 import prisma from "@/lib/db/db";
 import bcrypt from "bcrypt";
-import { DefaultSession } from "next-auth";
+import { DefaultSession, Session, User } from "next-auth";
+import { JWT } from "next-auth/jwt";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -12,9 +13,14 @@ declare module "next-auth" {
       verified: boolean;
     } & DefaultSession["user"];
   }
+  interface User {
+    id: string;
+    role: string;
+    verified: boolean;
+  }
 }
 
-export const authOptions = {
+const authOptions = {
   providers: [
     CredentialsProvider({
       id: "credentials",
@@ -23,7 +29,7 @@ export const authOptions = {
         email: { label: "Email", type: "text", placeholder: "jsmith" },
         password: { label: "Password", type: "password" }
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         const { email, password } = credentials!;
 
         if (!email || !password) {
@@ -55,13 +61,7 @@ export const authOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    session: ({
-      session,
-      token
-    }: {
-      session: Record<string, any>;
-      token: Record<string, any>;
-    }) => {
+    session: ({ session, token }: { session: Session; token: JWT }) => {
       return {
         ...session,
         user: {
@@ -73,13 +73,7 @@ export const authOptions = {
         expires: session.expires
       };
     },
-    jwt({
-      token,
-      user
-    }: {
-      token: Record<string, any>;
-      user: Record<string, any>;
-    }) {
+    jwt({ token, user }: { token: JWT; user: User }) {
       if (user) {
         token.id = user.id;
         token.role = user.role;

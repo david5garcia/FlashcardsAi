@@ -8,7 +8,7 @@ import {
 } from "react-hook-form";
 import Input from "./input";
 
-type InputErrorProps<T extends Record<string, any>> = {
+type InputErrorProps<T extends Record<string, unknown>> = {
   id: Path<T>;
   label: string;
   variant?: TextFieldVariants;
@@ -17,11 +17,11 @@ type InputErrorProps<T extends Record<string, any>> = {
   error?:
     | string
     | FieldError
-    | Merge<FieldError, FieldErrorsImpl<any>>
+    | Merge<FieldError, FieldErrorsImpl<T>>
     | undefined;
 };
 
-const InputError = <T extends Record<string, any>>({
+const InputError = <T extends Record<string, unknown>>({
   id,
   label,
   variant = "outlined",

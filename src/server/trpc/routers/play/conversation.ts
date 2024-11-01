@@ -14,7 +14,7 @@ export const conversationRouter = router({
     )
     .mutation(async ({ input }) => {
       try {
-        const game = await conversationService.createMessage(
+        await conversationService.createMessage(
           input.gameId,
           input.sender,
           input.content
