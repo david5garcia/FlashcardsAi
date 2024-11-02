@@ -23,7 +23,7 @@ const Register = () => {
   const router = useRouter();
 
   const registerMutation = trpc.register.registerUser.useMutation({
-    onSuccess: (response) => {
+    onSuccess: () => {
       router.push("/login?status=success&email=" + watch("email"));
     },
     onError: (error) => {
