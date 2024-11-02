@@ -1,7 +1,8 @@
+import prisma from "@/lib/db/db";
+import bcrypt from "bcrypt";
 import { DefaultSession, Session, User } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from "bcrypt";
 
 declare module "next-auth" {
   interface Session {
