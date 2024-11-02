@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useState } from "react";
 import Chat from "./chat";
 import "./css/game.css";
+import { useRouter } from "next/navigation";
+import Button from "../shared/button";
 
 const Game = ({
   flashcard,
@@ -15,6 +17,7 @@ const Game = ({
   conversation: { messages: Message[] };
 }) => {
   const [gameOver, setGameOver] = useState(game.status === "COMPLETED");
+  const router = useRouter();
 
   return (
     <div className="flex flex-col items-center justify-center gap-3 h-1 flex-1">
@@ -56,6 +59,11 @@ const Game = ({
         setGameOver={setGameOver}
         conversation={conversation}
       />
+      {gameOver && (
+        <Button className="btn btn-primary mb-10" onClick={() => router.push("/play")}>
+          Play Again
+        </Button>
+      )}
     </div>
   );
 };
