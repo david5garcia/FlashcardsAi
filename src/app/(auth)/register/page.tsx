@@ -22,19 +22,22 @@ const Register = () => {
   });
   const router = useRouter();
 
-  const registerMutation = trpc.register.registerUser.useMutation({
-    onSuccess: () => {
-      router.push("/login?status=success&email=" + watch("email"));
-    },
-    onError: (error) => {
-      toast.error(error.message);
-      console.error(error);
-    }
-  });
+  const registerMutation = trpc.register.registerUser.useMutation();
 
   const onSubmit: SubmitHandler<RegisterForm> = (data) => {
-    const res = registerMutation.mutate(data);
-    console.log(res);
+    const loadingToast = toast.loading("Registering user");
+    registerMutation.mutate(data, {
+      onSuccess: () => {
+        router.push("/login?status=success&email=" + watch("email"));
+      },
+      onError: (error) => {
+        toast.error(error.message);
+        console.error(error);
+      },
+      onSettled: () => {
+        toast.dismiss(loadingToast);
+      }
+    });
   };
 
   return (
