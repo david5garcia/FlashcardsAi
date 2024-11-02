@@ -134,15 +134,14 @@ const Chat = ({
       if (topChatContainerRef.current) {
         const rect = topChatContainerRef.current.getBoundingClientRect();
         const distance = window.innerHeight - rect.bottom;
+        observer.observe(topChatContainerRef.current);
         setDistanceToBottom(distance);
+      } else {
+        updateDistance();
       }
     };
 
     const observer = new ResizeObserver(updateDistance);
-
-    if (topChatContainerRef.current) {
-      observer.observe(topChatContainerRef.current);
-    }
 
     updateDistance();
 
