@@ -7,7 +7,7 @@ import Card from "../shared/card";
 
 const authLinks = [
   { href: "/play", label: "Play" },
-  { href: "/profile", label: "Profile" },
+  // { href: "/profile", label: "Profile" },
   { href: "/logout", label: "Logout" }
 ];
 
