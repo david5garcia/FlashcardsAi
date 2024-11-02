@@ -5,3 +5,9 @@
 .card__front,
 .card__back { backface-visibility: hidden;}
 .card__back{ transform: rotateY(.5turn);}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}

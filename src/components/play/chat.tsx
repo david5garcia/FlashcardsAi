@@ -3,14 +3,7 @@ import { trpc } from "@/app/_trpc/client";
 import { Flashcard, Game, Message } from "@prisma/client";
 import { useChat } from "ai/react";
 import Image from "next/image";
-import {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState
-} from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import Card from "../shared/card";
 
 const checkIfCorrect = (message: string, word: string) => {
@@ -114,12 +107,8 @@ const Chat = ({
       }
     }
   });
-  const [distanceToBottom, setDistanceToBottom] = useState<number | undefined>(
-    undefined
-  );
 
   const messagesContainerRef = useRef<HTMLDivElement>(null);
-  const topChatContainerRef = useRef<HTMLDivElement>(null);
 
   const scroll = () => {
     const { offsetHeight, scrollHeight, scrollTop } =
@@ -128,31 +117,6 @@ const Chat = ({
       messagesContainerRef.current?.scrollTo(0, scrollHeight + 200);
     }
   };
-
-  useLayoutEffect(() => {
-    const updateDistance = () => {
-      if (topChatContainerRef.current) {
-        const rect = topChatContainerRef.current.getBoundingClientRect();
-        const distance = window.innerHeight - rect.bottom;
-        observer.observe(topChatContainerRef.current);
-        setDistanceToBottom(distance);
-      } else {
-        updateDistance();
-      }
-    };
-
-    const observer = new ResizeObserver(updateDistance);
-
-    updateDistance();
-
-    window.addEventListener("resize", updateDistance);
-    return () => {
-      window.removeEventListener("resize", updateDistance);
-      if (topChatContainerRef.current) {
-        observer.unobserve(topChatContainerRef.current);
-      }
-    };
-  }, []);
 
   useEffect(() => {
     setMessages((prev) => [
@@ -176,7 +140,7 @@ const Chat = ({
     return (
       <div
         ref={messagesContainerRef}
-        className="pr-10 pl-5 py-5 flex flex-col gap-5 overflow-scroll"
+        className="pr-10 pl-5 py-5 flex flex-col gap-3 overflow-scroll text-sm"
       >
         {messages.map((m, index) => (
           <div key={m.id} className={`flex justify-center items-center`}>
@@ -184,8 +148,8 @@ const Chat = ({
               className="avatar"
               alt="avatar"
               src={m.role === "user" ? "/images/human.png" : "/images/bot.png"}
-              width={40}
-              height={40}
+              width={35}
+              height={35}
             />
             <div style={{ width: "100%", marginLeft: "16px" }}>
               <p className="message">{m.content}</p>
@@ -201,10 +165,9 @@ const Chat = ({
 
   return (
     <>
-      <div ref={topChatContainerRef}></div>
       <Card
-        className={`flex flex-col justify-between p-5 w-[100%] max-w-[500px]`}
-        style={{ height: distanceToBottom && distanceToBottom - 50 }}
+        className={`flex flex-col justify-between p-5 w-[100%] max-w-[500px] flex-1 mb-8`}
+        style={{ height: "inherit" }}
       >
         {renderResponse()}
         <form onSubmit={onSubmit} className="relative">
