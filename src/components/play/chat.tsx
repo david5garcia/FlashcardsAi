@@ -139,7 +139,7 @@ const Chat = ({
       }
     };
 
-    updateDistance();
+    requestAnimationFrame(updateDistance);
     window.addEventListener("resize", updateDistance);
     return () => window.removeEventListener("resize", updateDistance);
   }, []);
