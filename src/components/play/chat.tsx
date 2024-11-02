@@ -3,7 +3,7 @@ import { trpc } from "@/app/_trpc/client";
 import { Flashcard, Game, Message } from "@prisma/client";
 import { useChat } from "ai/react";
 import Image from "next/image";
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import Card from "../shared/card";
 
 const checkIfCorrect = (message: string, word: string) => {
