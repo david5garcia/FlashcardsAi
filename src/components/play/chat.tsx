@@ -139,9 +139,20 @@ const Chat = ({
       }
     };
 
-    requestAnimationFrame(updateDistance);
+    let times = 0;
+    const interval = setInterval(() => {
+      updateDistance();
+      times++;
+      if (times === 100) {
+        clearInterval(interval);
+      }
+    }, 100);
+
     window.addEventListener("resize", updateDistance);
-    return () => window.removeEventListener("resize", updateDistance);
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("resize", updateDistance);
+    };
   }, []);
 
   useEffect(() => {
