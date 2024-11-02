@@ -146,7 +146,7 @@ const Chat = ({
     return (
       <div
         ref={messagesContainerRef}
-        className="pr-10 pl-5 py-5 flex flex-col gap-3 overflow-scroll text-sm"
+        className="pr-10 pl-5 py-5 flex flex-col gap-3 overflow-scroll text-sm no-scrollbar"
       >
         {messages.map((m, index) => (
           <div key={m.id} className={`flex justify-center items-center`}>
