@@ -51,13 +51,15 @@ model Flashcard {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   Game          Game[]
+
+  @@unique([word, level])
 }
 
 model Conversation {
   id        Int       @id @default(autoincrement())
   user      User      @relation(fields: [userId], references: [id])
   userId    String
-  messages   Message[]
+  messages  Message[]
   createdAt DateTime  @default(now())
   Game      Game?
 }
