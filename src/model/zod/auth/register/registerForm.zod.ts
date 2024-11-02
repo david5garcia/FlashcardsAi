@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const passwordRequirements = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,20}$/;
+const passwordRequirements = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{6,20}$/;
 
 const registerFormZod = z
   .object({
