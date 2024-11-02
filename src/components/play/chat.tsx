@@ -134,24 +134,24 @@ const Chat = ({
       if (topChatContainerRef.current) {
         const rect = topChatContainerRef.current.getBoundingClientRect();
         const distance = window.innerHeight - rect.bottom;
-        console.log(distance);
         setDistanceToBottom(distance);
       }
     };
 
-    let times = 0;
-    const interval = setInterval(() => {
-      updateDistance();
-      times++;
-      if (times === 100) {
-        clearInterval(interval);
-      }
-    }, 100);
+    const observer = new ResizeObserver(updateDistance);
+
+    if (topChatContainerRef.current) {
+      observer.observe(topChatContainerRef.current);
+    }
+
+    updateDistance();
 
     window.addEventListener("resize", updateDistance);
     return () => {
-      clearInterval(interval);
       window.removeEventListener("resize", updateDistance);
+      if (topChatContainerRef.current) {
+        observer.unobserve(topChatContainerRef.current);
+      }
     };
   }, []);
 
