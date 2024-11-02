@@ -47,16 +47,22 @@ const Chat = ({
         content: `Congratulations! You guessed the word: ${flashcard.word}`
       }
     ]);
-    messageMutation.mutate({
-      gameId: game.id,
-      sender: "USER",
-      content: userInput
-    });
-    messageMutation.mutate({
-      gameId: game.id,
-      sender: "BOT",
-      content: `Congratulations! You guessed the word: ${flashcard.word}`
-    });
+    messageMutation.mutate(
+      {
+        gameId: game.id,
+        sender: "USER",
+        content: userInput
+      },
+      {
+        onSettled: () => {
+          messageMutation.mutate({
+            gameId: game.id,
+            sender: "BOT",
+            content: `Congratulations! You guessed the word: ${flashcard.word}`
+          });
+        }
+      }
+    );
   };
 
   const gameCompleted = (userInput: string) => {
