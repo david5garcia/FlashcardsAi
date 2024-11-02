@@ -30,12 +30,14 @@ const Login = ({ searchParams }: { searchParams: Record<string, string> }) => {
   }, [searchParams.status]);
 
   const onSubmit: SubmitHandler<LoginForm> = async (data) => {
+    const signInToast = toast.loading("Logging in...");
     const res = await signIn("credentials", {
       email: data.email,
       password: data.password,
       redirect: false
     });
     if (!res || res.error) {
+      toast.dismiss(signInToast);
       toast.error("Invalid email or password");
       return;
     }
