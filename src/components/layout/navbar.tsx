@@ -77,7 +77,7 @@ const Navbar = () => {
               </button>
               <ul>
                 {showMenu && (
-                  <Card className="absolute top-12 right-0 px-4 pl-14 text-[#333] w-fit flex flex-col gap-4 z-10 py-6">
+                  <Card className="absolute top-12 right-0 px-4 pl-14 text-[#333] w-fit flex flex-col gap-4 z-10 py-6 bg-[#ffffffe6]">
                     {links.map((link) => {
                       return (
                         <li

@@ -166,7 +166,7 @@ const Chat = ({
   return (
     <>
       <Card
-        className={`flex flex-col justify-between p-5 w-[100%] max-w-[500px] flex-1 mb-8`}
+        className={`flex flex-col justify-between p-5 w-[100%] max-w-[500px] flex-1 mb-8 bg-[#ffffffe6]`}
         style={{ height: "inherit" }}
       >
         {renderResponse()}

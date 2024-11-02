@@ -43,7 +43,7 @@ const Login = ({ searchParams }: { searchParams: Record<string, string> }) => {
   };
 
   return (
-    <Card className="max-w-96 mx-auto p-6 mt-4 flex flex-col gap-6">
+    <Card className="max-w-96 mx-auto p-6 mt-4 flex flex-col gap-6 bg-white">
       <h1 className="text-3xl mx-auto">Login</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
         <InputError
