@@ -12,7 +12,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         style={style}
-        className={`${className} shadow-xl rounded-lg bg-white`}
+        className={`${className} shadow-xl rounded-lg bg-[#ffffffe6]`}
       >
         {children}
       </div>

@@ -15,6 +15,7 @@ const Register = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors }
   } = useForm<RegisterForm>({
     resolver: zodResolver(registerFormZod)
@@ -23,8 +24,7 @@ const Register = () => {
 
   const registerMutation = trpc.register.registerUser.useMutation({
     onSuccess: (response) => {
-      toast.success(response.message, { autoClose: 10000 });
-      router.push("/login");
+      router.push("/login?status=success&email=" + watch("email"));
     },
     onError: (error) => {
       toast.error(error.message);

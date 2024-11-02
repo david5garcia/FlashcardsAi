@@ -6,6 +6,7 @@ import loginFormZod, { LoginForm } from "@/model/zod/auth/login/loginForm.zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -19,6 +20,14 @@ const Login = ({ searchParams }: { searchParams: Record<string, string> }) => {
     defaultValues: { email: searchParams.email, password: "" }
   });
   const router = useRouter();
+
+  useEffect(() => {
+    if (searchParams.status === "success") {
+      toast.success("Registration successful, please login", {
+        autoClose: 5000
+      });
+    }
+  }, [searchParams.status]);
 
   const onSubmit: SubmitHandler<LoginForm> = async (data) => {
     const res = await signIn("credentials", {

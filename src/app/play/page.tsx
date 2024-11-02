@@ -21,7 +21,7 @@ const Play = () => {
   });
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 text-center justify-center items-center">
       <h2 className="text-white text-2xl">Choose difficulty</h2>
       <div className="flex flex-col md:flex-row gap-4">
         {Object.keys(Level).map((level) => (
