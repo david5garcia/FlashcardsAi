@@ -5,16 +5,17 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Card from "../shared/card";
 
+const noAuthLinks = [
+  { href: "/login", label: "Login" },
+  { href: "/register", label: "Register" }
+];
 const authLinks = [
   { href: "/play", label: "Play" },
   { href: "/profile", label: "Profile" },
   { href: "/logout", label: "Logout" }
 ];
-
-const noAuthLinks = [
-  { href: "/login", label: "Login" },
-  { href: "/register", label: "Register" }
-];
+const modLinks = [{ href: "/flashcard", label: "Flashcards" }, ...authLinks];
+const adminLinks = [{ href: "/admin/dashboard", label: "Admin" }, ...modLinks];
 
 const Navbar = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -22,7 +23,16 @@ const Navbar = () => {
 
   const session = useSession();
 
-  const links = session.data ? authLinks : noAuthLinks;
+  const links = (() => {
+    if (session.status === "loading") return [];
+    if (!session.data) return noAuthLinks;
+
+    const role = session.data.user.role;
+
+    if (role === "ADMIN") return adminLinks;
+    if (role === "MODERATOR") return modLinks;
+    return authLinks;
+  })();
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);

@@ -62,7 +62,12 @@ const changePassword = async (newPassword: string, token: string) => {
   });
 };
 
+const getAllUsers = async () => {
+  return prisma.user.findMany();
+};
+
 export const userService = {
   startResetPasswordProcess,
-  changePassword
+  changePassword,
+  getAllUsers
 };

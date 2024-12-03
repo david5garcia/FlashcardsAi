@@ -54,7 +54,6 @@ model Flashcard {
   hint          String
   definition    String
   pronunciation String
-  image         String?
   level         Level
   user          User?    @relation(fields: [userId], references: [id])
   userId        String
