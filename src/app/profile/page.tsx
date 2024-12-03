@@ -2,7 +2,7 @@ import ProfileTable from "@/components/profile/profileTable";
 import Card from "@/components/shared/card";
 import prisma from "@/lib/db/db";
 import authOptions from "@/lib/utils/auth/authOptions";
-import { MessageSender, Prisma } from "@prisma/client";
+import { GameStatus, MessageSender, Prisma } from "@prisma/client";
 import { getServerSession } from "next-auth";
 
 export type GameData = Prisma.GameGetPayload<{
@@ -61,7 +61,7 @@ const Profile = async () => {
         <p className="text-xl">
           You have:&nbsp;
           <span className="text-2xl text-[#4158d0]">
-            {gameData.reduce(
+            {gameData.filter(game => game.status === GameStatus.COMPLETED).reduce(
               (sum, game) =>
                 sum +
                 Math.max(100 - (game.conversation._count.messages - 1) * 5, 40),

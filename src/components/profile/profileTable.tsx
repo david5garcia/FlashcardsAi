@@ -8,6 +8,7 @@ import {
   TableHead,
   TableRow
 } from "@mui/material";
+import { GameStatus } from "@prisma/client";
 import Link from "next/link";
 
 const ProfileTable = ({ gameData }: { gameData: GameData }) => {
@@ -30,9 +31,18 @@ const ProfileTable = ({ gameData }: { gameData: GameData }) => {
           <TableBody>
             {gameData.map((game) => (
               <TableRow key={game.id}>
-                <TableCell>{game.flashcard.word}</TableCell>
                 <TableCell>
-                  <Link href={`/play/game/${game.id}`}>Link</Link>
+                  {game.status === GameStatus.COMPLETED
+                    ? game.flashcard.word
+                    : "••••••"}
+                </TableCell>
+                <TableCell>
+                  <Link
+                    className="text-[#4158d0] font-bold"
+                    href={`/play/game/${game.id}`}
+                  >
+                    Link 🔗
+                  </Link>
                 </TableCell>
                 <TableCell>
                   <p
@@ -52,10 +62,12 @@ const ProfileTable = ({ gameData }: { gameData: GameData }) => {
                 </TableCell>
                 <TableCell>{game.mode}</TableCell>
                 <TableCell>
-                  {Math.max(
-                    100 - (game.conversation._count.messages - 1) * 5,
-                    40
-                  )}
+                  {game.status === GameStatus.COMPLETED
+                    ? Math.max(
+                        100 - (game.conversation._count.messages - 1) * 5,
+                        40
+                      )
+                    : ""}
                 </TableCell>
               </TableRow>
             ))}
