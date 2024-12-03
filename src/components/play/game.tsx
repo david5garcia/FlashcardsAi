@@ -1,11 +1,10 @@
 "use client";
 import { Flashcard, Game as GamePrisma, Message } from "@prisma/client";
-import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Button from "../shared/button";
 import Chat from "./chat";
 import "./css/game.css";
-import { useRouter } from "next/navigation";
-import Button from "../shared/button";
 
 const Game = ({
   flashcard,
@@ -35,16 +34,6 @@ const Game = ({
           </div>
           <div className="card__back absolute w-[380px] h-[200px] max-w-[100%] px-12 py-4 top-0 bottom-0 right-0 left-0 p-8 bg-[#ffffffe6] flex flex-col items-center rounded-lg justify-evenly">
             <h3 className="text-md">{flashcard.word}</h3>
-            {flashcard.image && (
-              <Image
-                src={flashcard.image}
-                alt={flashcard.word}
-                width={100}
-                height={100}
-                objectFit="cover"
-                className="rounded-lg"
-              />
-            )}
             <p className="font-medium text-sm">
               <i className="font-normal">{flashcard.definition}</i>
             </p>
@@ -60,7 +49,10 @@ const Game = ({
         conversation={conversation}
       />
       {gameOver && (
-        <Button className="btn btn-primary mb-10" onClick={() => router.push("/play")}>
+        <Button
+          className="btn btn-primary mb-10"
+          onClick={() => router.push("/play")}
+        >
           Play Again
         </Button>
       )}
