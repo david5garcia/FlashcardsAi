@@ -55,18 +55,23 @@ const Profile = async () => {
 
   return (
     <div className="my-6">
-      <Card className="bg-white my-5 p-4 flex flex-col gap-4">
-        <h1 className=" font-semibold text-[2.4rem]">Profile</h1>
-        <p className="text-xl">Welcome {user.email?.split("@")[0]}.</p>
+      <Card className="bg-white my-5 p-8 flex flex-col gap-4">
+        <h1 className=" font-semibold text-[2.4rem] text-[#4158d0]">Profile</h1>
+        <p className="text-xl">Welcome {user.email?.split("@")[0]} 🚀</p>
         <p className="text-xl">
-          You have:&nbsp;
+          You have&nbsp;
           <span className="text-2xl text-[#4158d0]">
-            {gameData.filter(game => game.status === GameStatus.COMPLETED).reduce(
-              (sum, game) =>
-                sum +
-                Math.max(100 - (game.conversation._count.messages - 1) * 5, 40),
-              0
-            )}
+            {gameData
+              .filter((game) => game.status === GameStatus.COMPLETED)
+              .reduce(
+                (sum, game) =>
+                  sum +
+                  Math.max(
+                    100 - (game.conversation._count.messages - 1) * 5,
+                    40
+                  ),
+                0
+              )}
           </span>
           &nbsp;points!
         </p>

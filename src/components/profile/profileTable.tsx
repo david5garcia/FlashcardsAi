@@ -24,7 +24,6 @@ const ProfileTable = ({ gameData }: { gameData: GameData }) => {
               <TableCell>Difficulty</TableCell>
               <TableCell>Guesses</TableCell>
               <TableCell>Date</TableCell>
-              <TableCell>Mode</TableCell>
               <TableCell>Points</TableCell>
             </TableRow>
           </TableHead>
@@ -48,9 +47,9 @@ const ProfileTable = ({ gameData }: { gameData: GameData }) => {
                   <p
                     className={`${
                       game.status === "COMPLETED"
-                        ? "text-green-500"
-                        : "text-orange-400"
-                    } font-semibold`}
+                        ? "text-green-600"
+                        : "text-orange-500"
+                    } font-medium`}
                   >
                     {game.status}
                   </p>
@@ -60,7 +59,6 @@ const ProfileTable = ({ gameData }: { gameData: GameData }) => {
                 <TableCell>
                   {new Date(game.createdAt).toLocaleString()}
                 </TableCell>
-                <TableCell>{game.mode}</TableCell>
                 <TableCell>
                   {game.status === GameStatus.COMPLETED
                     ? Math.max(

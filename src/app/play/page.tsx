@@ -25,7 +25,7 @@ const Play = () => {
   });
 
   return (
-    <div className="flex flex-col gap-4 text-center justify-center items-center">
+    <div className="flex flex-col gap-8 text-center justify-center items-center mt-20">
       {loading ? (
         <div className="mt-40">
           <CircularProgress size={80} color="secondary" />
