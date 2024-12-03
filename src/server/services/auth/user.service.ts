@@ -29,7 +29,7 @@ const startResetPasswordProcess = async (email: string) => {
 
   const resetLink = `${process.env.NEXT_PUBLIC_WEB_URL}/reset-password/${token}`;
 
-  emailService.sendEmail(
+  await emailService.sendEmail(
     email,
     "Reset password",
     `You can reset your password by clicking this link: ${resetLink}`,
