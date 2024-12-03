@@ -38,7 +38,7 @@ const ModFlashcard = ({ flashCard }: { flashCard: Flashcard }) => {
         <b>Level:</b> {flashCard.level}
       </p>
       <p>
-        <b>Created at:</b>
+        <b>Created at: </b>
         {new Date(flashCard.createdAt).toLocaleString()}
       </p>
       <Button
