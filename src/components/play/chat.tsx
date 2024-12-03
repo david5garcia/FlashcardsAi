@@ -65,11 +65,11 @@ const Chat = ({
     );
   };
 
-  const gameCompleted = (userInput: string) => {
+  const gameCompleted = async (userInput: string) => {
     setGameOver(true);
     setInput("");
-    setGameStatusCompleted();
-    addFinalMessages(userInput);
+    await setGameStatusCompleted();
+    await addFinalMessages(userInput);
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

@@ -5,6 +5,7 @@ import InputError from "@/components/shared/inputError";
 import loginFormZod, { LoginForm } from "@/model/zod/auth/login/loginForm.zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -22,8 +23,12 @@ const Login = ({ searchParams }: { searchParams: Record<string, string> }) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (searchParams.status === "success") {
+    if (searchParams.status === "registerSuccess") {
       toast.success("Registration successful, please login", {
+        autoClose: 5000
+      });
+    } else if (searchParams.status === "resetPasswordSuccess") {
+      toast.success("Password reset successful, please login", {
         autoClose: 5000
       });
     }
@@ -45,9 +50,12 @@ const Login = ({ searchParams }: { searchParams: Record<string, string> }) => {
   };
 
   return (
-    <Card className="max-w-96 mx-auto p-6 mt-4 flex flex-col gap-6 bg-white">
+    <Card className="max-w-96 mx-auto p-6 mt-4 flex flex-col gap-6 bg-white items-center">
       <h1 className="text-3xl mx-auto">Login</h1>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-6 w-full"
+      >
         <InputError
           type="email"
           id="email"
@@ -64,6 +72,9 @@ const Login = ({ searchParams }: { searchParams: Record<string, string> }) => {
         />
         <Button className="mx-auto">Submit</Button>
       </form>
+      <Link className="text-[#4858cf]" href="/reset-password">
+        Forgot your password?
+      </Link>
       <ToastContainer />
     </Card>
   );

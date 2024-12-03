@@ -24,6 +24,7 @@ const ProfileTable = ({ gameData }: { gameData: GameData }) => {
               <TableCell>Guesses</TableCell>
               <TableCell>Date</TableCell>
               <TableCell>Mode</TableCell>
+              <TableCell>Points</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -50,6 +51,12 @@ const ProfileTable = ({ gameData }: { gameData: GameData }) => {
                   {new Date(game.createdAt).toLocaleString()}
                 </TableCell>
                 <TableCell>{game.mode}</TableCell>
+                <TableCell>
+                  {Math.max(
+                    100 - (game.conversation._count.messages - 1) * 5,
+                    40
+                  )}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

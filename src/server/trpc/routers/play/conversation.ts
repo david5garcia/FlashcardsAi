@@ -1,10 +1,10 @@
 import { PublicError } from "@/model/trpc/publicError";
 import { conversationService } from "@/server/services/conversation.service";
 import { z } from "zod";
-import { publicProcedure, router } from "../../trpc";
+import { protectedProcedure, router } from "../../trpc";
 
 export const conversationRouter = router({
-  createMessage: publicProcedure
+  createMessage: protectedProcedure
     .input(
       z.object({
         content: z.string(),

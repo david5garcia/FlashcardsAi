@@ -152,14 +152,6 @@ async function main() {
       userId: user.id
     },
     {
-      word: "Apple",
-      hint: "A fruit often associated with Newton",
-      definition: "A round fruit with red, green, or yellow skin",
-      pronunciation: "ˈæp.əl",
-      level: Level.BEGINNER,
-      userId: user.id
-    },
-    {
       word: "Cup",
       hint: "Used for drinking liquids",
       definition: "A small bowl-shaped container for drinking from",
@@ -368,27 +360,10 @@ async function main() {
       userId: user.id
     },
     {
-      word: "Pizza",
-      hint: "An Italian dish topped with cheese and tomato",
-      definition:
-        "A flatbread with toppings, usually baked with cheese and tomato",
-      pronunciation: "ˈpiːt.sə",
-      level: Level.BEGINNER,
-      userId: user.id
-    },
-    {
       word: "Radio",
       hint: "Plays music and news without images",
       definition: "A device that receives and plays sound signals",
       pronunciation: "ˈreɪ.di.oʊ",
-      level: Level.BEGINNER,
-      userId: user.id
-    },
-    {
-      word: "Bottle",
-      hint: "Holds liquids, often with a cap",
-      definition: "A container, typically for liquids, with a narrow neck",
-      pronunciation: "ˈbɒt.əl",
       level: Level.BEGINNER,
       userId: user.id
     },
@@ -492,22 +467,6 @@ async function main() {
       userId: user.id
     },
     {
-      word: "Fan",
-      hint: "Used to cool down a room",
-      definition: "A device that creates air flow for cooling",
-      pronunciation: "fæn",
-      level: Level.BEGINNER,
-      userId: user.id
-    },
-    {
-      word: "Apple",
-      hint: "A fruit often associated with Newton",
-      definition: "A round fruit with red, green, or yellow skin",
-      pronunciation: "ˈæp.əl",
-      level: Level.BEGINNER,
-      userId: user.id
-    },
-    {
       word: "Glove",
       hint: "Worn on hands for warmth or protection",
       definition:
@@ -581,15 +540,6 @@ async function main() {
       userId: user.id
     },
     {
-      word: "Compass",
-      hint: "A tool that shows directions",
-      definition:
-        "An instrument used for navigation and orientation, pointing north",
-      pronunciation: "ˈkʌm.pəs",
-      level: Level.INTERMEDIATE,
-      userId: user.id
-    },
-    {
       word: "Sculpture",
       hint: "An artwork made by shaping materials like stone or metal",
       definition: "A three-dimensional work of art made by carving or molding",
@@ -638,14 +588,6 @@ async function main() {
       definition:
         "A piece of rock or metal that burns up in the Earth’s atmosphere",
       pronunciation: "ˈmiː.ti.ɔːr",
-      level: Level.INTERMEDIATE,
-      userId: user.id
-    },
-    {
-      word: "Carousel",
-      hint: "A rotating ride with seats, often horses, at fairs",
-      definition: "A rotating amusement ride with seats or models for riders",
-      pronunciation: "ˌkær.əˈsel",
       level: Level.INTERMEDIATE,
       userId: user.id
     },
@@ -778,15 +720,6 @@ async function main() {
       userId: user.id
     },
     {
-      word: "Compass",
-      hint: "A tool that shows directions",
-      definition:
-        "An instrument used for navigation and orientation, pointing north",
-      pronunciation: "ˈkʌm.pəs",
-      level: Level.INTERMEDIATE,
-      userId: user.id
-    },
-    {
       word: "Acorn",
       hint: "The nut of an oak tree",
       definition: "A small nut produced by oak trees",
@@ -800,14 +733,6 @@ async function main() {
       definition:
         "A small bag with a shoulder strap, often used for carrying books",
       pronunciation: "ˈsætʃ.əl",
-      level: Level.INTERMEDIATE,
-      userId: user.id
-    },
-    {
-      word: "Carousel",
-      hint: "A rotating ride with seats, often horses, at fairs",
-      definition: "A rotating amusement ride with seats or models for riders",
-      pronunciation: "ˌkær.əˈsel",
       level: Level.INTERMEDIATE,
       userId: user.id
     },
@@ -979,15 +904,6 @@ async function main() {
       userId: user.id
     },
     {
-      word: "Accordion",
-      hint: "A musical instrument with bellows and keys",
-      definition:
-        "A musical instrument that produces sound by squeezing air through reeds",
-      pronunciation: "əˈkɔːr.di.ən",
-      level: Level.INTERMEDIATE,
-      userId: user.id
-    },
-    {
       word: "Whisk",
       hint: "A kitchen tool for mixing or beating",
       definition:
@@ -1060,22 +976,6 @@ async function main() {
       hint: "An instrument used to measure atmospheric pressure",
       definition: "An instrument that measures the pressure of the atmosphere",
       pronunciation: "bəˈrɒm.ɪ.tər",
-      level: Level.INTERMEDIATE,
-      userId: user.id
-    },
-    {
-      word: "Carousel",
-      hint: "A rotating ride often seen at amusement parks",
-      definition: "An amusement ride with rotating seats, usually horses",
-      pronunciation: "ˌkær.əˈsel",
-      level: Level.INTERMEDIATE,
-      userId: user.id
-    },
-    {
-      word: "Lighthouse",
-      hint: "A tall building with a light to guide ships",
-      definition: "A tower with a powerful light to warn or guide ships",
-      pronunciation: "ˈlaɪt.haʊs",
       level: Level.INTERMEDIATE,
       userId: user.id
     },

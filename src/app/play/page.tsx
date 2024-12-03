@@ -20,6 +20,7 @@ const Play = () => {
     },
     onError: (error) => {
       toast.error(error.message);
+      setLoading(false);
     }
   });
 

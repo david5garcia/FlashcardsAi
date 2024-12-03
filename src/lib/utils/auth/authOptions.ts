@@ -19,6 +19,8 @@ declare module "next-auth" {
   }
 }
 
+
+
 const authOptions = {
   providers: [
     CredentialsProvider({
@@ -60,14 +62,14 @@ const authOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    session: ({ session, token }: { session: Session; token: JWT }) => {
+    session: ({ session, token }: { session: Session; token: JWT }): Session => {
       return {
         ...session,
         user: {
           ...session.user,
-          userId: token.id,
-          role: token.role,
-          verified: token.verified
+          userId: token.id as string,
+          role: token.role as string, 
+          verified: token.verified as boolean
         },
         expires: session.expires
       };
