@@ -1,57 +1,15 @@
 import ProfileTable from "@/components/profile/profileTable";
 import Card from "@/components/shared/card";
-import prisma from "@/lib/db/db";
 import authOptions from "@/lib/utils/auth/authOptions";
-import { GameStatus, MessageSender, Prisma } from "@prisma/client";
+import { profileService } from "@/server/services/profile.service";
+import { GameStatus } from "@prisma/client";
 import { getServerSession } from "next-auth";
-
-export type GameData = Prisma.GameGetPayload<{
-  include: {
-    conversation: {
-      select: {
-        _count: {
-          select: {
-            messages: {
-              where: {
-                sender: "USER";
-              };
-            };
-          };
-        };
-      };
-    };
-    flashcard: true;
-  };
-}>[];
 
 const Profile = async () => {
   const session = await getServerSession(authOptions);
   const { user } = session!;
 
-  const gameData = await prisma.game.findMany({
-    where: {
-      userId: String(user.userId)
-    },
-    orderBy: {
-      createdAt: "desc"
-    },
-    include: {
-      conversation: {
-        select: {
-          _count: {
-            select: {
-              messages: {
-                where: {
-                  sender: MessageSender.USER
-                }
-              }
-            }
-          }
-        }
-      },
-      flashcard: true
-    }
-  });
+  const gameData = await profileService.getProfileData(user.userId);
 
   return (
     <div className="my-6">

@@ -21,18 +21,5 @@ export const registerRouter = router({
       return {
         message: "User registered, email sent to verify account"
       };
-    }),
-
-  verifyUser: publicProcedure
-    .input(
-      z.object({
-        userId: z.string()
-      })
-    )
-    .mutation(async ({ input }) => {
-      await registerService.verifyUser(input.userId);
-      return {
-        message: "Verification email sent"
-      };
     })
 });

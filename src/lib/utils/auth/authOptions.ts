@@ -1,5 +1,4 @@
-import prisma from "@/lib/db/db";
-import bcrypt from "bcrypt";
+import { authService } from "@/server/services/auth/auth.service";
 import { DefaultSession, Session, User } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -19,8 +18,6 @@ declare module "next-auth" {
   }
 }
 
-
-
 const authOptions = {
   providers: [
     CredentialsProvider({
@@ -37,22 +34,7 @@ const authOptions = {
           return null;
         }
 
-        const user = await prisma.user.findFirst({
-          where: {
-            email
-          }
-        });
-
-        if (!user || !bcrypt.compareSync(password, user!.password)) {
-          return null;
-        }
-
-        return {
-          id: String(user.id),
-          email: user.email,
-          verified: user.verified,
-          role: user.role
-        };
+        return await authService.authorize(email, password);
       }
     })
   ],
@@ -62,13 +44,19 @@ const authOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    session: ({ session, token }: { session: Session; token: JWT }): Session => {
+    session: ({
+      session,
+      token
+    }: {
+      session: Session;
+      token: JWT;
+    }): Session => {
       return {
         ...session,
         user: {
           ...session.user,
           userId: token.id as string,
-          role: token.role as string, 
+          role: token.role as string,
           verified: token.verified as boolean
         },
         expires: session.expires
