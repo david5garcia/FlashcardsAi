@@ -1,8 +1,7 @@
+import { PublicError } from "@/model/trpc/publicError";
 import registerFormZod from "@/model/zod/auth/register/registerForm.zod";
 import { registerService } from "@/server/services/auth/register.service";
-import { z } from "zod";
 import { publicProcedure, router } from "../../trpc";
-import { PublicError } from "@/model/trpc/publicError";
 
 export const registerRouter = router({
   registerUser: publicProcedure
