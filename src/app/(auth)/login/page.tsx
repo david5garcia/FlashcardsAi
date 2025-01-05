@@ -4,7 +4,7 @@ import Card from "@/components/shared/card";
 import InputError from "@/components/shared/inputError";
 import loginFormZod, { LoginForm } from "@/model/zod/auth/login/loginForm.zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -21,6 +21,13 @@ const Login = ({ searchParams }: { searchParams: Record<string, string> }) => {
     defaultValues: { email: searchParams.email, password: "" }
   });
   const router = useRouter();
+  const session = useSession();
+
+  useEffect(() => {
+    if (session.data) {
+      router.replace("/");
+    }
+  }, [session.data]);
 
   useEffect(() => {
     if (searchParams.status === "registerSuccess") {
