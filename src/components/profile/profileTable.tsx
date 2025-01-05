@@ -1,4 +1,4 @@
-import { GameData } from "@/app/profile/page";
+import { GameData } from "@/server/services/profile.service";
 import {
   Paper,
   Table,
