@@ -1,4 +1,5 @@
 import { MessageSender, Prisma } from "@prisma/client";
+import prisma from "@/lib/db/db";
 
 export type GameData = Prisma.GameGetPayload<{
   include: {

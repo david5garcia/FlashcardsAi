@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import prisma from "@/lib/db/db";
 
 const authorize = async (email: string, password: string) => {
   const user = await prisma.user.findFirst({
